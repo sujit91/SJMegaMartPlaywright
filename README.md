@@ -30,6 +30,8 @@ python -m venv .venv
 .venv\Scripts\activate
 pip install -r requirements.txt
 playwright install chromium
+
+In PyCharm set the interpreter to `.venv\Scripts\python.exe` (not the global Python 3.13). Global Python does not have pytest-html / pytest-playwright.
 ```
 
 ## Run

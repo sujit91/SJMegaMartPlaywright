@@ -35,11 +35,16 @@ _records: dict[str, dict] = {}
 _started = 0.0
 
 
+@pytest.hookimpl(tryfirst=True)
 def pytest_configure(config):
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
     SCREENSHOT_DIR.mkdir(parents=True, exist_ok=True)
     ARTIFACT_DIR.mkdir(parents=True, exist_ok=True)
-    install_action_hooks()
+    _apply_optional_plugin_defaults(config)
+    try:
+        install_action_hooks()
+    except Exception:
+        pass
     try:
         from pytest_metadata.plugin import metadata_key
 
@@ -50,6 +55,24 @@ def pytest_configure(config):
         meta["Mode"] = "Headless" if HEADLESS else "Headed"
     except Exception:
         pass
+
+
+def _apply_optional_plugin_defaults(config):
+    option = getattr(config, "option", None)
+    if option is None:
+        return
+    if hasattr(option, "htmlpath") and not option.htmlpath:
+        option.htmlpath = str(REPORT_DIR / "report.html")
+    if hasattr(option, "self_contained_html"):
+        option.self_contained_html = True
+    if getattr(option, "screenshot", None) == "off":
+        option.screenshot = "only-on-failure"
+    if hasattr(option, "full_page_screenshot"):
+        option.full_page_screenshot = True
+    if getattr(option, "video", None) == "off":
+        option.video = "retain-on-failure"
+    if getattr(option, "output", None) in (None, "test-results"):
+        option.output = str(ARTIFACT_DIR)
 
 
 @pytest.hookimpl(optionalhook=True)

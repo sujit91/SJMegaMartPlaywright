@@ -7,8 +7,6 @@ import time
 from contextvars import ContextVar
 from pathlib import Path
 
-from playwright.sync_api import Locator, Page
-
 SCREENSHOT_DIR = Path("reports") / "screenshots"
 _steps: ContextVar[list[dict]] = ContextVar("sj_steps")
 _installed = False
@@ -105,6 +103,8 @@ def install_action_hooks() -> None:
     global _installed
     if _installed:
         return
+    from playwright.sync_api import Locator, Page
+
     Locator.click = _wrap_locator(Locator.click, "Click")
     Locator.fill = _wrap_locator(Locator.fill, "Fill")
     Locator.hover = _wrap_locator(Locator.hover, "Hover")
