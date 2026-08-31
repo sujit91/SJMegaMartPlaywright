@@ -39,8 +39,15 @@ pipeline {
       junit allowEmptyResults: true, testResults: 'reports/*junit.xml'
       publishHTML(target: [
         reportDir: 'reports',
+        reportFiles: 'management-report.html',
+        reportName: 'Management Test Report',
+        keepAll: true,
+        alwaysLinkToLastBuild: true
+      ])
+      publishHTML(target: [
+        reportDir: 'reports',
         reportFiles: 'report.html',
-        reportName: 'Playwright HTML Report',
+        reportName: 'Detailed Playwright Report',
         keepAll: true,
         alwaysLinkToLastBuild: true
       ])
