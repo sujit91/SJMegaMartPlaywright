@@ -45,18 +45,21 @@ def test_footer_is_visible(page: Page):
 
 
 def test_grocery_nav_link(page: Page):
-    HomePage(page).open()
-    expect(page.locator("a[href='grocery.html']").first).to_be_visible()
+    home = HomePage(page)
+    home.open()
+    home.expect_category_nav("grocery")
 
 
 def test_fashion_nav_link(page: Page):
-    HomePage(page).open()
-    expect(page.locator("a[href='fashion.html']").first).to_be_visible()
+    home = HomePage(page)
+    home.open()
+    home.expect_category_nav("fashion")
 
 
 def test_electronics_nav_link(page: Page):
-    HomePage(page).open()
-    expect(page.locator("a[href='electronics.html']").first).to_be_visible()
+    home = HomePage(page)
+    home.open()
+    home.expect_category_nav("electronics")
 
 
 def test_hover_tab_shows_dropdown(page: Page):

@@ -38,6 +38,8 @@ playwright install chromium
 pytest tests --browser chromium
 pytest tests -m smoke --browser chromium
 pytest tests --html=reports/report.html --self-contained-html
+
+Local runs open a visible Chromium window (`HEADLESS` defaults to `false`). Set `HEADLESS=true` for CI or headless mode.
 ```
 
 Base URL (override with env `BASE_URL`):

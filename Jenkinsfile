@@ -6,6 +6,7 @@ pipeline {
   }
   environment {
     BASE_URL = 'https://sujitjena90.github.io/SujitTestingAutomation/'
+    HEADLESS = 'true'
     PYTHONUNBUFFERED = '1'
   }
   stages {

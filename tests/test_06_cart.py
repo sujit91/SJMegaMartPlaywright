@@ -28,7 +28,7 @@ def test_add_product_updates_badge(page: Page):
 def test_seeded_cart_shows_item(page: Page):
     seed_cart(page, 2)
     CartPage(page).open()
-    expect(page.locator("#cartItemsList, .cart-item, body")).to_contain_text("Milk")
+    expect(page.locator("#cartItemsList")).to_contain_text("Amul Taaza Milk")
 
 
 def test_cart_page_loads(page: Page):

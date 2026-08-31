@@ -68,7 +68,9 @@ def test_phone_max_length_is_ten(page: Page):
 
 def test_login_switch_link(page: Page):
     SignupPage(page).open()
-    expect(page.locator("a[href='login.html']")).to_be_visible()
+    expect(
+        page.locator("p").filter(has_text="Already have an account?").get_by_role("link", name="Login")
+    ).to_be_visible()
 
 
 def test_google_signup_button(page: Page):

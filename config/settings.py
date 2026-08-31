@@ -6,7 +6,7 @@ BASE_URL = os.getenv(
 ).rstrip("/") + "/"
 
 DEFAULT_TIMEOUT = int(os.getenv("DEFAULT_TIMEOUT", "20000"))
-HEADLESS = os.getenv("HEADLESS", "true").lower() == "true"
+HEADLESS = os.getenv("HEADLESS", "false").lower() == "true"
 
 DEMO_USER = os.getenv("DEMO_USER", "admin")
 DEMO_PASSWORD = os.getenv("DEMO_PASSWORD", "admin")

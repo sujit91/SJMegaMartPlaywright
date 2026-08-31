@@ -12,7 +12,7 @@ pytestmark = [pytest.mark.checkout, pytest.mark.regression]
 def test_empty_checkout_shows_message(page: Page):
     clear_cart(page)
     CheckoutPage(page).open()
-    expect(page.locator("#checkoutContent, body")).to_contain_text("Add")
+    expect(page.locator("#checkoutContent")).to_contain_text("Your cart is empty")
 
 
 @pytest.mark.smoke
@@ -101,7 +101,8 @@ def test_detect_location_button(logged_in_page: Page):
 def test_checkout_map_placeholder(logged_in_page: Page):
     seed_cart(logged_in_page)
     CheckoutPage(logged_in_page).open()
-    expect(logged_in_page.locator("#checkoutMap")).to_be_visible()
+    expect(logged_in_page.locator("#checkoutMap")).to_be_attached()
+    expect(logged_in_page.locator(".detect-location-btn")).to_be_visible()
 
 
 def test_checkout_page_url(page: Page):

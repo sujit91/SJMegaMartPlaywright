@@ -1,8 +1,16 @@
 import pytest
 from playwright.sync_api import Page
 
-from config.settings import BASE_URL
+from config.settings import BASE_URL, HEADLESS
 from pages.login_page import LoginPage
+
+
+@pytest.fixture(scope="session")
+def browser_type_launch_args(browser_type_launch_args):
+    return {
+        **browser_type_launch_args,
+        "headless": HEADLESS,
+    }
 
 
 @pytest.fixture(scope="session")
