@@ -45,20 +45,26 @@ Local runs open a visible Chromium window (`HEADLESS` defaults to `false`). Set 
 
 ## Reports
 
-Every pytest run writes files under `reports/` (folder is gitignored):
+Every pytest run creates a **new timestamped folder** (nothing is overwritten):
+
+```
+reports/
+  index.html                          # all runs
+  management-report.html              # latest summary (Jenkins)
+  runs/20260831_185742/
+    management-report.html            # group / Jenkins summary for this run
+    tests/test_01_login/<test>/report.html   # one HTML per test case
+```
 
 | File | Audience |
 | --- | --- |
-| `reports/management-report.html` | Management – pass rate, GO/NO-GO, steps, failed-step screenshots, video on fail |
-| `reports/report.html` | QA – detailed pytest-html with steps, screenshots and video |
-| `reports/artifacts/` | Playwright videos (`video.webm`) and failure screenshots |
-| `reports/junit.xml` | Jenkins / CI |
-
-Failed steps are screenshotted automatically. Video is kept **on failure** (`--video retain-on-failure`). Record every test with `--video on`. Zip the whole `reports` folder if you send videos with the HTML.
-
-Open the management report after a run:
+| `reports/index.html` | History of every run |
+| `reports/runs/<timestamp>/management-report.html` | Management summary for that suite/Jenkins job |
+| `reports/runs/<timestamp>/tests/<file>/<test>/report.html` | Individual test report (steps, screenshot, video) |
+| `reports/management-report.html` | Copy of the latest summary |
 
 ```bat
+start reports\index.html
 start reports\management-report.html
 ```
 ```

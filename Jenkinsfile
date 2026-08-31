@@ -25,12 +25,12 @@ pipeline {
     }
     stage('Smoke') {
       steps {
-        bat '.venv\\Scripts\\pytest tests -m smoke --browser chromium --junitxml=reports/smoke-junit.xml --html=reports/smoke.html --self-contained-html'
+        bat '.venv\\Scripts\\pytest tests -m smoke --browser chromium --junitxml=reports/smoke-junit.xml'
       }
     }
     stage('Regression') {
       steps {
-        bat '.venv\\Scripts\\pytest tests --browser chromium --junitxml=reports/junit.xml --html=reports/report.html --self-contained-html'
+        bat '.venv\\Scripts\\pytest tests --browser chromium --junitxml=reports/junit.xml'
       }
     }
   }
