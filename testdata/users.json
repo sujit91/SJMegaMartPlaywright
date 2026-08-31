@@ -1,0 +1,11 @@
+{
+  "demo": {
+    "username": "admin",
+    "password": "admin",
+    "displayName": "Admin"
+  },
+  "registered": {
+    "email": "abc1@gmail.com",
+    "password": "Automation@123"
+  }
+}
