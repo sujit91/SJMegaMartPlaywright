@@ -11,6 +11,7 @@ class BasePage:
         self.timeout = DEFAULT_TIMEOUT
 
 
+
     def goto(self, path: str = "") -> None:
         url = path if path.startswith("http") else f"{BASE_URL}{path.lstrip('/')}"
         self.page.goto(url, wait_until="domcontentloaded")
